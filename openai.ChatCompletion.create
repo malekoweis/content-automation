@@ -1,0 +1,13 @@
+import openai
+
+def generate_description(alt_text):
+    response = openai.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a creative content assistant."},
+            {"role": "user", "content": f"Write a short descriptive caption for: {alt_text}"}
+        ],
+        temperature=0.7,
+        max_tokens=50
+    )
+    return response.choices[0].message.content.strip()

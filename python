@@ -1,0 +1,48 @@
+import json
+from pexels_api import get_pexels_images
+from youtube_api import search_youtube_videos
+from tiktok_api import search_tiktok_videos
+from pixel_tracker import track_pixel_events
+
+def main():
+    query = "nature"
+
+    print("\nGetting images from Pexels...")
+    images = get_pexels_images(query)
+    for img in images:
+        print(f"Pexels Image URL: {img['url']}")
+
+    print("\nGetting videos from YouTube...")
+    youtube_videos = search_youtube_videos(query)
+    for vid in youtube_videos:
+        print(f"YouTube Video URL: {vid['url']}")
+
+    print("\nGetting videos from TikTok...")
+    tiktok_videos = search_tiktok_videos(query)
+    for vid in tiktok_videos:
+        print(f"TikTok Video URL: {vid['url']}")
+
+    print("\nTracking Pixel Events...")
+    import io
+    import sys
+    old_stdout = sys.stdout
+    sys.stdout = mystdout = io.StringIO()
+    track_pixel_events()
+    sys.stdout = old_stdout
+    pixel_logs = mystdout.getvalue().strip().split('\n')
+
+    # Save all output to JSON
+    output = {
+        "pexels_images": images,
+        "youtube_videos": youtube_videos,
+        "tiktok_videos": tiktok_videos,
+        "pixel_events": pixel_logs
+    }
+
+    with open("output.json", "w") as f:
+        json.dump(output, f, indent=4)
+
+    print("\n✅ Results exported to output.json")
+
+if __name__ == "__main__":
+    main()

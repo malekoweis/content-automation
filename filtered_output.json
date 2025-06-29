@@ -1,0 +1,30 @@
+{
+  "pexels_images": [],
+  "youtube_videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=hlWiI4xVXKY",
+      "gpt_description": "I'm sorry, I am unable to access external websites such as YouTube. If you can provide me with a brief description or context of the video, I'd be happy to help describe it for you.",
+      "category": "Tech",
+      "niche": "tech"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BHACKCNDMW8",
+      "gpt_description": "I'm sorry, but I'm unable to access or view online content. If you can provide me with a brief summary or description of the video, I'll be happy to help you with further information or insights based on that.",
+      "category": "Other",
+      "niche": "tech"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=pJxeyK7it0o",
+      "gpt_description": "Content description: I'm sorry, but I'm unable to access external websites or view specific content like YouTube videos. You can provide me with a brief description or context of the video, and I can try to help you understand or discuss it based on that information.",
+      "category": "Tech",
+      "niche": "tech"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=piIKvo-U8Qk",
+      "gpt_description": "I'm sorry, but I am unable to view videos or access specific content from URLs. Can you please provide me with some information about the title or context of the video so I can help describe it for you?",
+      "category": "Other",
+      "niche": "tech"
+    }
+  ],
+  "tiktok_videos": []
+}
