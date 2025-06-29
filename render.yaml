@@ -2,10 +2,6 @@ services:
   - type: web
     name: content-automation
     env: python
-    region: oregon
-    plan: free
     buildCommand: "pip install -r requirements.txt"
     startCommand: "python main.py"
-    repo: https://github.com/malekoweis/content-automation
-    branch: main
-    autoDeploy: true
+    pythonVersion: 3.10
