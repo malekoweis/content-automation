@@ -1,0 +1,8 @@
+openai
+requests
+moviepy
+imageio
+imageio-ffmpeg==0.4.7
+Pillow==9.4.0
+numpy==1.23.5
+tqdm
