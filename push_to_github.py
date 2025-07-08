@@ -11,6 +11,10 @@ def push_output_to_github():
         print("❌ output.json not found.")
         return
 
+    # ✅ Add user config so Git can commit in Render
+    subprocess.run(["git", "config", "--global", "user.name", "AutoBot"], check=True)
+    subprocess.run(["git", "config", "--global", "user.email", "autobot@render.com"], check=True)
+
     try:
         subprocess.run(["git", "add", "output.json"], check=True)
         subprocess.run(["git", "commit", "-m", "Update output.json from Render"], check=True)
@@ -18,7 +22,7 @@ def push_output_to_github():
         print("ℹ️ Nothing to commit.")
         return
 
-    # Set remote if missing
+    # ✅ Set remote if missing
     result = subprocess.run(["git", "remote"], capture_output=True, text=True)
     remotes = result.stdout.strip().split('\n')
     if "origin" not in remotes:
