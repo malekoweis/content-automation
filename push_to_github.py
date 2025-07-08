@@ -17,7 +17,8 @@ def push_output_to_github():
 
     try:
         subprocess.run(["git", "add", "output.json"], check=True)
-        subprocess.run(["git", "commit", "-m", "Update output.json from Render"], check=True)
+subprocess.run(["git", "commit", "--allow-empty", "-m", "Force push output.json from Render"], check=True)
+
     except subprocess.CalledProcessError:
         print("ℹ️ Nothing to commit.")
         return
