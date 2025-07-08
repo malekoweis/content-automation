@@ -1,15 +1,35 @@
 import requests
 
-API_KEY = "9qhG3xjHIBzHVXN9aYM4qevD2P9N6aDuDWFlUDl3ZMQjgFqLPWcuKQEa"
+# Replace with your actual API key
+PEXELS_API_KEY = "563492ad6f91700001000001abcdef1234567890abcdefabcdef"
 
+def get_pexels_videos(count=5):
+    """
+    Fetch video URLs from the Pexels API.
+    """
+    headers = {
+        "Authorization": PEXELS_API_KEY
+    }
+    params = {
+        "query": "nature",
+        "per_page": count
+    }
 
-def get_pexels_images(query, per_page=5):
-    url = "https://api.pexels.com/v1/search"
-    headers = {"Authorization": API_KEY}
-    params = {"query": query, "per_page": per_page}
+    response = requests.get("https://api.pexels.com/videos/search", headers=headers, params=params)
 
-    response = requests.get(url, headers=headers, params=params)
-    if response.status_code == 200:
-        return response.json()["photos"]
-    else:
-        return {"error": response.status_code, "message": response.text}
+    if response.status_code != 200:
+        print("❌ Failed to fetch videos from Pexels")
+        return []
+
+    data = response.json()
+    videos = []
+
+    for video in data.get("videos", []):
+        videos.append({
+            "type": "pexels",
+            "url": video["video_files"][0]["link"],
+            "thumbnailUrl": video["image"],
+            "description": video.get("user", {}).get("name", "Pexels video")
+        })
+
+    return videos
