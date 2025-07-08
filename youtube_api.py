@@ -1,24 +1,32 @@
-import requests
+from googleapiclient.discovery import build
 
-API_KEY = "AIzaSyDgEj4dcjaz2oOh7QGzQUxHZIWtlPMwnTo"  # your YouTube API key
+# Replace with your actual YouTube Data API key
+YOUTUBE_API_KEY = "AIzaSyDgEj4dcjaz2oOh7QGzQUxHZIWtlPMwnTo"
 
-def search_youtube_videos(query, max_results=5):
-    url = "https://www.googleapis.com/youtube/v3/search"
-    params = {
-        "part": "snippet",
-        "q": query,
-        "type": "video",
-        "maxResults": max_results,
-        "key": API_KEY
-    }
+def get_youtube_videos(query="nature", max_results=5):
+    youtube = build("youtube", "v3", developerKey=YOUTUBE_API_KEY)
 
-    response = requests.get(url, params=params)
-    if response.status_code == 200:
-        videos = []
-        for item in response.json().get("items", []):
-            video_id = item["id"]["videoId"]
-            video_url = f"https://www.youtube.com/watch?v={video_id}"
-            videos.append({"url": video_url})
-        return videos
-    else:
-        return {"error": response.status_code, "message": response.text}
+    request = youtube.search().list(
+        q=query,
+        part="snippet",
+        type="video",
+        maxResults=max_results
+    )
+
+    response = request.execute()
+
+    videos = []
+    for item in response.get("items", []):
+        video_url = f"https://www.youtube.com/watch?v={item['id']['videoId']}"
+        thumbnail = item['snippet']['thumbnails']['high']['url']
+        title = item['snippet']['title']
+        
+        videos.append({
+            "type": "youtube",
+            "url": video_url,
+            "thumbnailUrl": thumbnail,
+            "description": title
+        })
+
+    return videos
+
