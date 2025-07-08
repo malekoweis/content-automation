@@ -66,4 +66,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 import push_to_github
+push_to_github.push_output_to_github()

@@ -1,19 +1,35 @@
 import os
 import subprocess
 
-repo_url = "https://github.com/malekoweis/content-automation.git"
-token = os.environ.get("GH_TOKEN")
-if not token:
-    raise Exception("GitHub token not found in environment variable 'GH_TOKEN'")
+def push_output_to_github():
+    repo_dir = os.getcwd()
+    os.chdir(repo_dir)
 
-# Configure Git
-subprocess.run(["git", "config", "--global", "user.name", "AutoBot"], check=True)
-subprocess.run(["git", "config", "--global", "user.email", "autobot@render.com"], check=True)
+    # Git configuration
+    subprocess.run(["git", "config", "user.name", "render-bot"], check=True)
+    subprocess.run(["git", "config", "user.email", "render@bot.com"], check=True)
 
-# Clone, copy, commit, and push
-subprocess.run(["git", "clone", f"https://malekoweis:{token}@github.com/malekoweis/content-automation.git"], check=True)
-os.chdir("content-automation")
-subprocess.run(["cp", "../output.json", "."], check=True)
-subprocess.run(["git", "add", "output.json"], check=True)
-subprocess.run(["git", "commit", "-m", "Update output.json from Render"], check=True)
-subprocess.run(["git", "push"], check=True)
+    # Stage output.json
+    subprocess.run(["git", "add", "output.json"], check=True)
+
+    # Skip commit if no changes
+    result = subprocess.run(["git", "diff", "--cached", "--quiet"])
+    if result.returncode == 0:
+        print("✅ No changes to commit.")
+        return
+
+    # Commit and push using token
+    subprocess.run(["git", "commit", "-m", "Update output.json from Render"], check=True)
+
+    token = os.environ.get("GH_TOKEN")
+    if not token:
+        raise Exception("❌ GH_TOKEN is not set in environment.")
+
+    remote_url = f"https://{token}@github.com/malekoweis/content-automation.git"
+    subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
+
+    subprocess.run(["git", "push", "origin", "main"], check=True)
+    print("✅ output.json pushed to GitHub successfully.")
+
+if __name__ == "__main__":
+    push_output_to_github()
