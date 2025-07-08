@@ -1,8 +1,12 @@
-API_KEY = "9qhG3xjHIBzHVXN9aYM4qevD2P9N6aDuDWFlUDl3ZMQjgFqLPWcuKQEa"  # your TikTok API key
+# tiktok_api.py
 
-def search_tiktok_videos(query, max_results=5):
-    # Simulated result for now (since TikTok API is not officially public)
-    videos = [
-        {"url": f"https://www.tiktok.com/@user/video/{i}"} for i in range(1, max_results + 1)
+def get_tiktok_videos():
+    # Placeholder: Replace with actual scraping or API-based logic
+    print("Getting videos from TikTok...")
+    return [
+        {"type": "TikTok", "url": "https://www.tiktok.com/@user/video/1"},
+        {"type": "TikTok", "url": "https://www.tiktok.com/@user/video/2"},
+        {"type": "TikTok", "url": "https://www.tiktok.com/@user/video/3"},
+        {"type": "TikTok", "url": "https://www.tiktok.com/@user/video/4"},
+        {"type": "TikTok", "url": "https://www.tiktok.com/@user/video/5"}
     ]
-    return videos
