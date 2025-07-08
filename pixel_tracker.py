@@ -1,15 +1,15 @@
+import json
 import random
+import time
 
-def track_pixel_events():
-    # Simulate tracking pixel events
-    events = [
-        {"event": "PageView", "timestamp": "2025-06-16T12:00:00Z"},
-        {"event": "ViewContent", "timestamp": "2025-06-16T12:05:00Z"},
-        {"event": "AddToCart", "timestamp": "2025-06-16T12:10:00Z"},
-        {"event": "Purchase", "timestamp": "2025-06-16T12:15:00Z"},
-    ]
-    for event in events:
-        print(f"Tracked Event: {event['event']} at {event['timestamp']}")
-
-if __name__ == "__main__":
-    track_pixel_events()
+def track_pixels(data):
+    """
+    Simulate pixel tracking by adding a tracking_id and timestamp to each item.
+    """
+    for item in data:
+        item['tracking'] = {
+            "tracking_id": f"pxl_{random.randint(100000, 999999)}",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+    print(f"✅ Tracking Pixel Events...")
+    return data
