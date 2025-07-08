@@ -1,28 +1,36 @@
-import subprocess
 import os
+import subprocess
+from datetime import datetime
 
-def push_output_to_github():
+def push_output():
     try:
-        print("🔄 Attempting to push output.json to GitHub...")
+        # Setup Git identity
+        subprocess.run(["git", "config", "--global", "user.name", "Render Bot"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", "render@example.com"], check=True)
 
-        # Set Git user if not already set
-        subprocess.run(["git", "config", "--global", "user.email", "render@render.com"], check=True)
-        subprocess.run(["git", "config", "--global", "user.name", "Render Deploy"], check=True)
+        # Ensure remote is set correctly (replace if needed)
+        GITHUB_TOKEN = os.environ.get("GH_TOKEN")
+        if not GITHUB_TOKEN:
+            raise Exception("❌ GH_TOKEN environment variable not set.")
+        
+        remote_url = f"https://{GITHUB_TOKEN}@github.com/malekoweis/content-automation.git"
+        subprocess.run(["git", "remote", "remove", "origin"], check=False)
+        subprocess.run(["git", "remote", "add", "origin", remote_url], check=True)
 
-        # Check if remote "origin" exists
-        remotes = subprocess.run(["git", "remote"], capture_output=True, text=True)
-        if "origin" not in remotes.stdout:
-            remote_url = os.getenv("GIT_REMOTE_URL")
-            if not remote_url:
-                raise ValueError("❌ GIT_REMOTE_URL environment variable not set")
-            subprocess.run(["git", "remote", "add", "origin", remote_url], check=True)
+        # Debugging: Show current Git config
+        subprocess.run(["git", "remote", "-v"], check=True)
+        subprocess.run(["git", "branch", "-vv"], check=True)
 
-        # Add and commit output.json
+        # Add and commit changes with timestamp
         subprocess.run(["git", "add", "output.json"], check=True)
-        subprocess.run(["git", "commit", "--allow-empty", "-m", "Force push output.json from Render"], check=True)
-        subprocess.run(["git", "push", "origin", "main"], check=True)
+        commit_message = f"Update output.json - {datetime.now().isoformat()}"
+        subprocess.run(["git", "commit", "-m", commit_message], check=True)
 
+        # Force push to GitHub
+        subprocess.run(["git", "push", "origin", "main", "--force"], check=True)
         print("✅ output.json pushed to GitHub successfully.")
 
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Git error: {e}")
     except Exception as e:
-        print(f"❌ Failed to push to GitHub: {e}")
+        print(f"❌ General error: {e}")
