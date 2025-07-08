@@ -1,58 +1,38 @@
 import json
-import os
 
-INPUT_FILE = "output.json"
-FINAL_FILE = "final_output.json"
+# Load original data
+with open("filtered_output_fixed.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
 
-def main():
-    if not os.path.exists(INPUT_FILE):
-        print(f"Input file not found: {INPUT_FILE}")
-        return
+# Build flat list
+flat_output = []
 
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        new_data = json.load(f)
+# Extract YouTube
+for video in data.get("youtube_videos", []):
+    flat_output.append({
+        "url": video["url"],
+        "type": "youtube",
+        "thumbnailUrl": video.get("thumbnailUrl", "")
+    })
 
-    if os.path.exists(FINAL_FILE):
-        with open(FINAL_FILE, "r", encoding="utf-8") as f:
-            try:
-                existing_data = json.load(f)
-            except json.JSONDecodeError:
-                existing_data = {}
-    else:
-        existing_data = {}
+# Extract TikTok
+for video in data.get("tiktok_videos", []):
+    flat_output.append({
+        "url": video["url"],
+        "type": "tiktok",
+        "thumbnailUrl": video.get("thumbnailUrl", "")
+    })
 
-    for section in ["pexels_images", "youtube_videos", "tiktok_videos", "pixel_events"]:
-        new_items = new_data.get(section, [])
-        if section not in existing_data:
-            existing_data[section] = []
+# Extract Pexels
+for image in data.get("pexels_images", []):
+    flat_output.append({
+        "url": image.get("url", ""),
+        "type": "pexels",
+        "thumbnailUrl": image.get("src", {}).get("medium", "")
+    })
 
-        # Merge while avoiding duplicates
-        if isinstance(new_items, list) and isinstance(existing_data[section], list):
-            if section == "pixel_events":
-                # Items are strings, not dicts
-                existing_set = set(existing_data[section])
-                for item in new_items:
-                    if item not in existing_set:
-                        existing_data[section].append(item)
-            else:
-                # Items are dicts with "id" or "url"
-                existing_ids = {
-                    str(item.get("id") or item.get("url"))
-                    for item in existing_data[section]
-                    if isinstance(item, dict)
-                }
-                for item in new_items:
-                    if isinstance(item, dict):
-                        identifier = str(item.get("id") or item.get("url"))
-                        if identifier not in existing_ids:
-                            existing_data[section].append(item)
-        else:
-            existing_data[section] = new_items
+# Write to final output
+with open("output.json", "w", encoding="utf-8") as f:
+    json.dump(flat_output, f, indent=2)
 
-    with open(FINAL_FILE, "w", encoding="utf-8") as f:
-        json.dump(existing_data, f, indent=2, ensure_ascii=False)
-
-    print(f"✅ Finalized data written to: {FINAL_FILE}")
-
-if __name__ == "__main__":
-    main()
+print("✅ output.json written successfully with", len(flat_output), "items")
