@@ -1,8 +1,17 @@
 [
   {
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "type": "youtube",
+    "thumbnailUrl": "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg"
+  },
+  {
+    "url": "https://www.tiktok.com/@user/video/1234567890",
     "type": "tiktok",
-    "url": "sample.mp4",
-    "description": "Test video about birds and nature",
+    "thumbnailUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "url": "https://www.pexels.com/video/example-video/",
+    "type": "pexels",
     "thumbnailUrl": "https://via.placeholder.com/150"
   }
 ]
