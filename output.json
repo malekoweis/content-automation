@@ -1,172 +1,64 @@
-[
-  {
-    "url": "https://www.tiktok.com/@user/video/1",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I'm currently unable to view or interpret specific video content. However, if you provide me with a brief summary, I'd be more than happy to help you create an interesting description for it!"
-  },
-  {
-    "url": "https://www.tiktok.com/@user/video/2",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I'm unable to watch or analyze videos. Please provide details about the video and I'll help write a description."
-  },
-  {
-    "url": "https://www.tiktok.com/@user/video/3",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I'm currently unable to watch or analyze video content. Please provide details about the video so I can help generate a description."
-  },
-  {
-    "url": "https://www.tiktok.com/@user/video/4",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I'm unable to watch or interact with video content directly. However, you can describe the video to me and I'll help you to come up with a compelling description."
-  },
-  {
-    "url": "https://www.tiktok.com/@user/video/5",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I'm unable to watch or analyze video content. I can only assist based on the text or context you provide."
-  },
-  {
-    "url": "https://www.youtube.com/watch?v=hlWiI4xVXKY",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "This captivating video takes you on a mesmerizing journey through the world of quantum computers. It breaks down complex concepts into digestible content, using engaging visuals to illustrate the principles behind quantum computing. Perfect for tech enthusiasts and curious minds alike, this video provides a compelling insight into the future of technology."
-  },
-  {
-    "url": "https://www.youtube.com/watch?v=Mtn5GV04k-U",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "This breathtaking video takes you on an aerial journey through the stunning landscapes of Norway. From snow-capped mountains and deep green forests, to crystal clear lakes and charming coastal towns, the drone footage captures the natural beauty and diverse scenery of this Nordic country. Experience the magic of Norway's midnight sun and northern"
-  },
-  {
-    "url": "https://www.youtube.com/watch?v=pJxeyK7it0o",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I'm currently unable to watch or analyze videos. I'm here to help with text-based inquiries. Please provide some details about the video and I'd be happy to help you craft a description."
-  },
-  {
-    "url": "https://www.youtube.com/watch?v=piIKvo-U8Qk",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "As an AI, I am currently unable to view or analyze video content. However, if you provide a brief summary or context of the video, I can help generate a compelling description for it."
-  },
-  {
-    "url": "https://www.youtube.com/watch?v=qzGxK6Uiu04",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "Without access to video content, I'm unable to provide a description. Please provide details about the video."
-  },
-  {
-    "id": 2325447,
-    "width": 5184,
-    "height": 3456,
-    "url": "https://www.pexels.com/photo/hot-air-balloon-2325447/",
-    "photographer": "Francesco Ungaro",
-    "photographer_url": "https://www.pexels.com/@francesco-ungaro",
-    "photographer_id": 21273,
-    "avg_color": "#85928B",
-    "src": {
-      "original": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg",
-      "large2x": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "large": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-      "medium": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "small": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&h=130",
-      "portrait": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
-      "landscape": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-      "tiny": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+{
+  "youtube_videos": [
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=l52bfaNAlHU",
+      "description": "jai veeru ki yaari\ud83e\udd2a\ud83e\udd2a\ud83d\udc6d\ud83d\udc6d | #shorts #viralshorts #trending #7seven brothers",
+      "views": 2778200326
     },
-    "liked": false,
-    "alt": "Hot air balloons float over the mesmerizing landscape of Cappadocia, Turkey at sunrise.",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "Soar high with this awe-inspiring video featuring a colorful hot air balloon gracefully floating across a clear, blue sky. The breathtaking perspective offers a fascinating view of the world below, promoting a sense of freedom and adventure. Perfect for those who love travel and exploration."
-  },
-  {
-    "id": 886521,
-    "width": 4110,
-    "height": 2642,
-    "url": "https://www.pexels.com/photo/person-s-left-hand-holding-green-leaf-plant-886521/",
-    "photographer": "Alena Koval",
-    "photographer_url": "https://www.pexels.com/@alena-koval-233944",
-    "photographer_id": 233944,
-    "avg_color": "#DFE0D9",
-    "src": {
-      "original": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg",
-      "large2x": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "large": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-      "medium": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "small": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&h=130",
-      "portrait": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
-      "landscape": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-      "tiny": "https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=nhhcmLlS44w",
+      "description": "papa mein kahan baitho #shortvideo #youtubeshorts #trending #emotional #shorts",
+      "views": 793210687
     },
-    "liked": false,
-    "alt": "A hand painted green holds a fresh plant sprout against a light background, symbolizing growth and sustainability.",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "In this serene video, a person tenderly holds a vibrant green leaf, showcasing a beautiful connection between humans and nature. The visual detail in the leaf's structure is breathtaking, making this video a calming and captivating depiction of our natural world."
-  },
-  {
-    "id": 1133957,
-    "width": 3579,
-    "height": 2389,
-    "url": "https://www.pexels.com/photo/brown-hummingbird-selective-focus-photography-1133957/",
-    "photographer": "Philippe Donn",
-    "photographer_url": "https://www.pexels.com/@philippedonn",
-    "photographer_id": 230606,
-    "avg_color": "#685456",
-    "src": {
-      "original": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg",
-      "large2x": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "large": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-      "medium": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "small": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&h=130",
-      "portrait": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
-      "landscape": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-      "tiny": "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=znPlcGVHXBo",
+      "description": "Jhula Ke Leya Do Beheno\ufffc Ke Bich Jhagra #shortvideo #trending #jhula #siliguri #momandreedishna",
+      "views": 632174115
     },
-    "liked": false,
-    "alt": "A hummingbird hovers gracefully near a blooming red hibiscus, showcasing nature's delicate beauty.",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "Experience the delicate beauty of nature in this stunning video featuring a brown hummingbird. Captured with selective focus photography, the video provides a mesmerizing look at this tiny wonder, highlighting its intricate details and swift movements. Join us in this breathtaking, up-close encounter with one of nature's most fascinating creatures"
-  },
-  {
-    "id": 158063,
-    "width": 2200,
-    "height": 1376,
-    "url": "https://www.pexels.com/photo/green-leafed-tree-beside-body-of-water-during-daytime-158063/",
-    "photographer": "Pixabay",
-    "photographer_url": "https://www.pexels.com/@pixabay",
-    "photographer_id": 2659,
-    "avg_color": "#575C56",
-    "src": {
-      "original": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg",
-      "large2x": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "large": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-      "medium": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "small": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&h=130",
-      "portrait": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
-      "landscape": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-      "tiny": "https://images.pexels.com/photos/158063/bellingrath-gardens-alabama-landscape-scenic-158063.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=nqzIQh2D_Es",
+      "description": "Trending Nakhra (Official Video) : Amrit Maan ft. Ginni Kapoor | Intense | Punjabi Song",
+      "views": 355602644
     },
-    "liked": false,
-    "alt": "A beautiful spring garden landscape featuring vibrant pink flowers, a serene river, and a picturesque bridge.",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "Immerse yourself in the serene beauty of nature with this video. Watch as a lush, green-leafed tree stands majestically beside a calm body of water, creating a picture-perfect scene of tranquility. Shot during the daytime, the sunlight adds an ethereal glow to the landscape"
-  },
-  {
-    "id": 1386604,
-    "width": 2606,
-    "height": 3648,
-    "url": "https://www.pexels.com/photo/woman-holding-pink-tulips-1386604/",
-    "photographer": "Tu\u1ea5n Ki\u1ec7t Jr.",
-    "photographer_url": "https://www.pexels.com/@soldiervip",
-    "photographer_id": 312601,
-    "avg_color": "#827660",
-    "src": {
-      "original": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg",
-      "large2x": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "large": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-      "medium": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "small": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&h=130",
-      "portrait": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
-      "landscape": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-      "tiny": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=w9Cny28IndU",
+      "description": "Shadi ki mithai\ud83d\ude0d\ud83d\udc4f\ud83c\udffb\ud83d\ude09 #neetubisht #trendingonshorts #lakhneet #comedy #funny #trending  #shadi",
+      "views": 337193485
     },
-    "liked": false,
-    "alt": "An elegant young woman holding pink tulips in a serene outdoor setting, embodying natural beauty and tranquility.",
-    "gpt_description": "Error: \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
-    "description": "This captivating video captures the beautiful, serene moment of a woman gently holding a bouquet of fresh pink tulips. The soft petals and vibrant colors of the flowers contrast wonderfully with the woman's subtle smile, creating a peaceful, heartwarming scene that celebrates the beauty of nature and the simple joys of life"
-  }
-]
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=X5dg86tXQjU",
+      "description": "Golden guy gifted me gold \ud83d\ude28 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume",
+      "views": 341578825
+    },
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=JEV210XLDoY",
+      "description": "Challenge Accepted \ud83d\ude0e\ud83d\ude2e\u200d\ud83d\udca8\ud83e\udee0 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber",
+      "views": 233294146
+    },
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=HM9GIyGDtEk",
+      "description": "#comedy #funny #shorts #reels #trending #viralshorts #video",
+      "views": 239722546
+    },
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=gUVCU4RWf9g",
+      "description": "Power of love part 17#youtubeshorts #viralvideo #trending #foryou #funny #shortvideo #viral",
+      "views": 103015502
+    },
+    {
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=_cPgWzsvNA4",
+      "description": "ABC Song #shorts #trending #viral #cartoon #littletreehouse #babysongs #learn #rhymes",
+      "views": 105485318
+    }
+  ]
+}
