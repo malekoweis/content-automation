@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""
+Safely upload output.json to GitHub using the Contents API.
+- Reads GH_TOKEN from environment
+- Upserts content (creates or updates)
+- Works on 'main' branch
+"""
+
+import base64
+import json
+import os
+import sys
+from datetime import datetime
+import requests
+
+OWNER = "malekoweis"
+REPO = "content-automation"
+BRANCH = "main"
+FILE_PATH = "output.json"   # path in repo
+LOCAL_FILE = os.path.join(os.path.dirname(__file__), "output.json")
+
+API_BASE = "https://api.github.com"
+CONTENTS_URL = f"{API_BASE}/repos/{OWNER}/{REPO}/contents/{FILE_PATH}"
+
+def die(msg, code=1):
+    print(f"❌ {msg}")
+    sys.exit(code)
+
+def main():
+    token = os.getenv("GH_TOKEN")
+    if not token:
+        die("GH_TOKEN env var is missing")
+
+    if not os.path.exists(LOCAL_FILE):
+        die(f"Local file not found: {LOCAL_FILE}")
+
+    with open(LOCAL_FILE, "rb") as f:
+        content_bytes = f.read()
+
+    # encode content for GitHub API
+    b64_content = base64.b64encode(content_bytes).decode("utf-8")
+
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+    # 1) check if file exists to get its SHA
+    sha = None
+    r = requests.get(CONTENTS_URL, headers=headers, params={"ref": BRANCH})
+    if r.status_code == 200:
+        sha = r.json().get("sha")
+    elif r.status_code not in (404, 200):
+        die(f"GitHub GET failed ({r.status_code}): {r.text}")
+
+    # 2) PUT create/update
+    payload = {
+        "message": f"Update output.json ({datetime.utcnow().isoformat()}Z)",
+        "content": b64_content,
+        "branch": BRANCH,
+    }
+    if sha:
+        payload["sha"] = sha  # required for update
+
+    r = requests.put(CONTENTS_URL, headers=headers, data=json.dumps(payload))
+    if r.status_code in (200, 201):
+        print("✅ output.json uploaded to GitHub via API.")
+        return
+
+    # surface error
+    try:
+        data = r.json()
+    except Exception:
+        data = r.text
+    die(f"GitHub PUT failed ({r.status_code}): {data}")
+
+if __name__ == "__main__":
+    main()
