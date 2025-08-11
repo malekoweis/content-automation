@@ -2,15 +2,13 @@
 set -euxo pipefail
 python -V
 python -m pip install --upgrade pip
-# Install from your repo's requirements
+# Install your deps with the SAME interpreter Render will use
 python -m pip install --no-cache-dir -r requirements.txt
-# Belt & suspenders: ensure gunicorn is present even if the step above is ignored
+# Belt & suspenders: force-install gunicorn and prove it’s there
 python -m pip install --no-cache-dir gunicorn==22.0.0
-# Prove it's installed
 python -m pip show gunicorn
 python - << 'PY'
-import importlib
-import sys
+import importlib, sys
 try:
     importlib.import_module("gunicorn")
     print("gunicorn import OK")
