@@ -70,17 +70,19 @@ def _bg_run_pipeline():
             "ok": ok, "log_tail": log_tail, "error": err
         })
 
-@app.post("/run")
+@app.route("/run", methods=["POST"])
 def run_pipeline():
     with STATE_LOCK:
         if RUN_STATE["running"]:
-            return jsonify({"ok": True, "started": False, "running": True, "message": "already running"}), 202
+            # 200 JSON so jq always parses
+            return jsonify({"ok": True, "started": False, "running": True, "message": "already running"}), 200
         threading.Thread(target=_bg_run_pipeline, daemon=True).start()
         RUN_STATE["running"] = True
         RUN_STATE["started_at"] = time.time()
-    return jsonify({"ok": True, "started": True, "running": True}), 202
+    # 200 JSON, not 202, to avoid proxies stripping the body
+    return jsonify({"ok": True, "started": True, "running": True}), 200
 
-@app.get("/run/status")
+@app.route("/run/status", methods=["GET"])
 def run_status():
     with STATE_LOCK:
         st = dict(RUN_STATE)
@@ -93,7 +95,7 @@ def run_status():
     })
     return jsonify(st)
 
-@app.post("/push")
+@app.route("/push", methods=["POST"])
 def push_to_github():
     ok, log_tail = _run_script(["python", "push_to_github.py"], "push_to_github.log", 300)
     return jsonify({"ok": ok, "log_tail": log_tail}), (200 if ok else 500)
