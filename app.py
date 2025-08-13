@@ -148,3 +148,17 @@ if __name__ == "__main__":
 @app.get("/run/log")
 def run_log():
     return jsonify({"log_tail": _tail(LOGS_DIR / "run_main.log", 5000)})
+
+
+@app.post("/admin/clear_history")
+def clear_history():
+    import os, pathlib
+    token = os.environ.get("ADMIN_TOKEN")
+    if token and request.headers.get("X-Admin-Token") != token:
+        return jsonify({"ok": False, "error": "forbidden"}), 403
+    hist = BASE_DIR / "history.json"
+    deleted = False
+    if hist.exists():
+        hist.unlink()
+        deleted = True
+    return jsonify({"ok": True, "deleted": deleted})
