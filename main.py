@@ -14,6 +14,8 @@ TOPIC_OVERRIDE = os.environ.get("TOPIC_OVERRIDE")  # e.g. "technology"
 TARGET = 32
 HISTORY_MAX = 800
 
+EXTRA_TOKENS = ["news","review","tips","2025","AI","Android","hardware","software","gadget","camera","smartphone","leaks"]
+
 TOPICS = [
     "ai news","fitness","travel","street food","football highlights",
     "coding tips","photography","gaming clips","music freestyle",
@@ -42,6 +44,12 @@ def save_history(hist):
 def choose_topic():
     if TOPIC_OVERRIDE and TOPIC_OVERRIDE.strip():
         return TOPIC_OVERRIDE.strip()
+    # rotate every run (no fixed seed)
+    base = random.choice(TOPICS)
+    # 50% of the time, add an extra token to diversify the query
+    if random.random() < 0.5:
+        base = f"{base} {random.choice(EXTRA_TOKENS)}"
+    return base
     random.seed(int(time.time() // 300))  # rotate every 5 minutes
     return random.choice(TOPICS)
 
@@ -154,21 +162,17 @@ def main():
         seen.add(u); uniq.append(it)
 
     # History-based rotation
-    history = load_history(); hist_set = set(history)
-    fresh = [it for it in uniq if it["url"] not in hist_set]
+history = load_history(); hist_set = set(history)
+fresh = [it for it in uniq if it.get("url") not in hist_set]
 
-    result = []; result.extend(fresh[:TARGET])
-    if len(result) < TARGET:
-        for it in uniq:
-            if len(result) >= TARGET: break
-            if it["url"] in {x["url"] for x in result}: continue
-            result.append(it)
+# Strict novelty: only fresh items (no refilling with old URLs)
+result = fresh[:TARGET]
 
-    # Update history
-    new_hist = history + [it["url"] for it in result]
-    save_history(new_hist)
+# Update history
+new_hist = history + [it["url"] for it in result]
+save_history(new_hist)
 
-    write_output(result)
+write_output(result)
     print("✅ Script finished.", flush=True)
 
 if __name__ == "__main__":
