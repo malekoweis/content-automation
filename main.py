@@ -257,9 +257,22 @@ def main():
     all_items = []
     all_items += fetch_pexels_videos(topic, max_results=14)
     all_items += fetch_youtube_recent(topic, max_results=18)
-    all_items += fetch_tiktok_trending()
+    # Prefer explicit by-URL flow for scraper7; fallback to trending finder if configured
 
-    # dedupe by URL
+    tt_by_url = fetch_tiktok_by_urls()
+
+    all_items += tt_by_url
+
+    if not tt_by_url:
+
+        try:
+
+            all_items += fetch_tiktok_trending()
+
+        except NameError:
+
+            print("TikTok trending fetcher not available; only by-URL mode is supported.", flush=True)
+# dedupe by URL
     seen = set()
     uniq = []
     for it in all_items:
@@ -294,3 +307,70 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def fetch_tiktok_by_urls():
+    """
+    Uses the 'tiktok-scraper7' style endpoint:
+      GET https://{host}/?url=<tiktok video url>&hd=1
+    Reads list of video page URLs from TIKTOK_VIDEO_URLS (comma or newline separated).
+    Returns normalized items [{type,url,description,thumbnailUrl}, ...].
+    """
+    if not RAPIDAPI_KEY:
+        print("TikTok by URLs: missing RAPIDAPI_KEY; skipping", flush=True)
+        return []
+    if not TIKTOK_VIDEO_URLS:
+        print("TikTok by URLs: TIKTOK_VIDEO_URLS not set; skipping", flush=True)
+        return []
+
+    host = (RAPIDAPI_HOST or "tiktok-scraper7.p.rapidapi.com").strip()
+    base = f"https://{host}/"
+
+    # split on comma/newline and strip
+    raw_urls = [u.strip() for u in TIKTOK_VIDEO_URLS.replace("\\n", ",").split(",")]
+    urls = [u for u in raw_urls if u.startswith("http")]
+
+    out = []
+    for u in urls:
+        try:
+            params = {"url": u, "hd": "1"}
+            headers = {
+                "X-RapidAPI-Key": RAPIDAPI_KEY,
+                "X-RapidAPI-Host": host,
+            }
+            print(f"🎵 TikTok by-url: host={host} url={u}", flush=True)
+            r = requests.get(base, headers=headers, params=params, timeout=20)
+            r.raise_for_status()
+            data = r.json()
+
+            # Many providers return a 'data' object with play/nowm/url, title, cover
+            d = data.get("data") if isinstance(data, dict) else None
+            play = None
+            thumb = None
+            title = None
+            if isinstance(d, dict):
+                play = d.get("play") or d.get("hdplay") or d.get("nowm") or d.get("url")
+                thumb = d.get("cover") or d.get("origin_cover")
+                title = d.get("title") or d.get("desc") or "TikTok video"
+            # fallback shapes
+            if not play and isinstance(data, dict):
+                play = data.get("url") or data.get("nowm")
+                thumb = thumb or data.get("cover") or data.get("thumbnail")
+                title = title or data.get("title") or data.get("desc")
+
+            if not play:
+                print("   -> no playable URL found in response, skipping", flush=True)
+                continue
+
+            out.append({
+                "type": "tiktok",
+                "url": play,
+                "description": title or u,
+                "thumbnailUrl": thumb
+            })
+        except Exception as e:
+            print(f"⚠️ TikTok by-url error for {u}: {e}", flush=True)
+            continue
+
+    print(f"✅ TikTok by URLs: {len(out)}", flush=True)
+    return out
