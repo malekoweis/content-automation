@@ -83,6 +83,7 @@ def run_pipeline():
     return jsonify({"ok": True, "started": True, "running": True}), 200
 
 @app.route("/run/status", methods=["GET"])
+
 def run_status():
     with STATE_LOCK:
         st = dict(RUN_STATE)
@@ -136,3 +137,8 @@ def version():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "5000")))
+
+
+@app.get("/run/log")
+def run_log():
+    return jsonify({"log_tail": _tail(LOGS_DIR / "run_main.log", 5000)})
