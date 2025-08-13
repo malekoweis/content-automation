@@ -94,6 +94,8 @@ def run_status():
         "error": err,
         "items": (len(data) if isinstance(data, list) else None)
     })
+    if st.get("ok") is None and st.get("json_valid"):
+        st["ok"] = True
     return jsonify(st)
 
 @app.route("/push", methods=["POST"])
