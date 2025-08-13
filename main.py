@@ -6,7 +6,8 @@ HISTORY = BASE_DIR / "history.json"
 
 YT_API_KEY = os.environ.get("YT_API_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")  # optional
-RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY")      # optional
+RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY")
+RAPIDAPI_HOST = os.environ.get("RAPIDAPI_HOST")      # optional
 
 TARGET = 32
 HISTORY_MAX = 800
@@ -125,6 +126,48 @@ def fetch_tiktok_trending():
     if not RAPIDAPI_KEY:
         print("TikTok: missing RAPIDAPI_KEY; skipping", flush=True)
         return []
+    # Prefer explicit host, else try common ones
+    hosts = []
+    if RAPIDAPI_HOST:
+        hosts.append((RAPIDAPI_HOST, "/feed/trending"))
+    hosts += [
+        ("tiktok-scraper7.p.rapidapi.com", "/feed/trending"),
+        ("tiktok-scraper2.p.rapidapi.com", "/trending"),
+    ]
+    region = random.choice(["US","GB","DE","FR","JP","IN","BR","CA"])
+    count = random.randint(8, 18)
+
+    for host, path in hosts:
+        try:
+            url = f"https://{host}{path}"
+            headers = {"X-RapidAPI-Key": RAPIDAPI_KEY, "X-RapidAPI-Host": host}
+            params = {"region": region, "count": count}
+            print(f"🎵 TikTok: host={host} region={region} count={count}", flush=True)
+            r = requests.get(url, headers=headers, params=params, timeout=20)
+            r.raise_for_status()
+            data = r.json()
+            # Normalize common response shapes
+            raw = data.get("data") or data.get("aweme_list") or data.get("results") or data.get("itemList") or []
+            items = []
+            for it in raw:
+                play = it.get("play") or it.get("video", {}).get("play_addr", {}).get("url_list", [None])[0]
+                desc = it.get("title") or it.get("desc") or "TikTok video"
+                thumb = it.get("origin_cover") or it.get("video", {}).get("origin_cover", {}).get("url_list", [None])[0]
+                if not play:
+                    continue
+                items.append({
+                    "type": "tiktok",
+                    "url": play,
+                    "description": desc,
+                    "thumbnailUrl": thumb
+                })
+            print(f"✅ TikTok via {host}: {len(items)}", flush=True)
+            if items:
+                return items
+        except Exception as e:
+            print(f"⚠️ TikTok error via {host}: {e}", flush=True)
+            continue
+    return []
     region = random.choice(["US","GB","DE","FR","JP","IN","BR","CA"])
     count = random.randint(8, 18)
     print(f"🎵 TikTok: region={region} count={count}", flush=True)
