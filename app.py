@@ -125,7 +125,11 @@ def health():
 def get_output():
     if not OUTPUT_PATH.exists():
         return jsonify({"error": "output.json not found"}), 404
-    return send_file(str(OUTPUT_PATH), mimetype="application/json")
+    resp = send_file(str(OUTPUT_PATH), mimetype="application/json")
+    resp.headers["Cache-Control"] = "no-store, no-cache, max-age=0"
+    resp.headers["Pragma"] = "no-cache"
+    resp.headers["Expires"] = "0"
+    return resp
 
 @app.get("/version")
 def version():
