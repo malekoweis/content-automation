@@ -126,6 +126,49 @@ def fetch_tiktok_trending():
     if not RAPIDAPI_KEY:
         print("TikTok: missing RAPIDAPI_KEY; skipping", flush=True)
         return []
+    # Hosts & paths to try (first uses RAPIDAPI_HOST if provided)
+    host_candidates = []
+    if RAPIDAPI_HOST:
+        host_candidates.append(RAPIDAPI_HOST.strip())
+    host_candidates += ["tiktok-scraper7.p.rapidapi.com", "tiktok-scraper2.p.rapidapi.com", "tiktok-video-no-watermark2.p.rapidapi.com"]
+    host_candidates = list(dict.fromkeys(host_candidates))  # dedupe, keep order
+
+    # Common paths used by different providers
+    path_candidates = ["/feed/trending", "/trending", "/trending/feed"]
+
+    region = random.choice(["US","GB","DE","FR","JP","IN","BR","CA"])
+    count = random.randint(8, 18)
+
+    for host in host_candidates:
+        for path in path_candidates:
+            try:
+                url = f"https://{host}{path}"
+                headers = {"X-RapidAPI-Key": RAPIDAPI_KEY, "X-RapidAPI-Host": host}
+                params = {"region": region, "count": count}
+                print(f"🎵 TikTok: host={host} path={path} region={region} count={count}", flush=True)
+                r = requests.get(url, headers=headers, params=params, timeout=20)
+                if r.status_code == 404:
+                    print("   -> 404 on this host/path, trying next…", flush=True)
+                    continue
+                r.raise_for_status()
+                data = r.json()
+                # Normalize a few common shapes
+                raw = data.get("data") or data.get("aweme_list") or data.get("results") or data.get("itemList") or []
+                items = []
+                for it in raw:
+                    play = it.get("play") or it.get("video", {}).get("play_addr", {}).get("url_list", [None])[0]
+                    desc = it.get("title") or it.get("desc") or "TikTok video"
+                    thumb = it.get("origin_cover") or it.get("video", {}).get("origin_cover", {}).get("url_list", [None])[0]
+                    if not play:
+                        continue
+                    items.append({"type": "tiktok", "url": play, "description": desc, "thumbnailUrl": thumb})
+                print(f"✅ TikTok via {host}{path}: {len(items)}", flush=True)
+                if items:
+                    return items
+            except Exception as e:
+                print(f"⚠️ TikTok error via {host}{path}: {e}", flush=True)
+                continue
+    return []
     # Prefer explicit host, else try common ones
     hosts = []
     if RAPIDAPI_HOST:
