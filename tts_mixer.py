@@ -46,7 +46,6 @@ def ffprobe_duration_ms(path: pathlib.Path) -> int:
 def stretch_ffmpeg(in_path: pathlib.Path, out_path: pathlib.Path, factor: float) -> bool:
     if factor <= 0: return False
     f = max(0.5, min(2.0, factor))
-    # chain if needed
     filters = []
     remaining = factor
     while remaining < 0.5 or remaining > 2.0:
@@ -73,7 +72,6 @@ def fit_to_target(voice: AudioSegment, target_ms: int, tmpdir: pathlib.Path) -> 
             return AudioSegment.from_file(out_path, format="mp3")
         except Exception:
             pass
-    # fallback: pad/trim
     return voice + AudioSegment.silent(duration=target_ms - len(voice)) if len(voice) < target_ms else voice[:target_ms]
 
 def mix_audio(voice: AudioSegment, music: AudioSegment) -> AudioSegment:
@@ -96,10 +94,10 @@ def process_items(src_json="output.json", limit=5):
     items = json.load(open(src_json,"r",encoding="utf-8"))
     print(f"[TTS] items: {len(items)} (limit={limit})", flush=True)
 
+    manifest = []
     with tempfile.TemporaryDirectory() as td:
         tmp = pathlib.Path(td)
 
-        # bg music
         bg_path = tmp / "bg.mp3"
         if dl(BG_MUSIC_URL, bg_path):
             print("[TTS] bg: downloaded", flush=True)
@@ -143,9 +141,19 @@ def process_items(src_json="output.json", limit=5):
                 print("[TTS] mux…", flush=True)
                 ffmpeg_mux(vid, mix_path, out)
                 print(f"✅ {out}", flush=True)
+
+                manifest.append({"index": i, "source_url": it["url"], "file": out.name})
                 made += 1
             except Exception as e:
                 print("skip", i, e, flush=True)
+
+    try:
+        OUT_DIR.mkdir(exist_ok=True)
+        with open(OUT_DIR / "manifest.json","w",encoding="utf-8") as f:
+            json.dump(manifest, f, ensure_ascii=False, indent=2)
+        print("[TTS] wrote rendered/manifest.json", flush=True)
+    except Exception as e:
+        print("[TTS] manifest write failed:", e, flush=True)
 
 if __name__ == "__main__":
     process_items(limit=int(os.getenv("RENDER_LIMIT","5")))
